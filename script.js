@@ -379,22 +379,6 @@ function xy(x, y) {
 
 ///////////////////////////////////////////////
 
-function rotateJC1JCC2(){
-  rotateJ([xy(40, 0), xy(20, -20), null, xy(-20, 20)]);
-}
-
-function rotateJC2JCC4(){
-  rotateJ([xy(0, -40), xy(-20, -20), null, xy(20, 20)]);
-}
-
-function rotateJC3JCC1(){
-  rotateJ([xy(0, 40), xy(20, 20), null, xy(-20, -20)]);
-}
-
-function rotateJC4JCC3(){
-  rotateJ([xy(-40, 0), xy(-20, 20), null, xy(20, -20)]);
-}
-
 function rotateJ(values) {
   for (let i = 0; i < values.length; i++) {
     if (values[i] !== null) {
@@ -406,25 +390,25 @@ function rotateJ(values) {
 
 function checkJRotationClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC1JCC2();
+    rotateJ([xy(40, 0), xy(20, -20), null, xy(-20, 20)]);
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC2JCC4();
+    rotateJ([xy(0, -40), xy(-20, -20), null, xy(20, 20)]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC3JCC1();
+    rotateJ([xy(0, 40), xy(20, 20), null, xy(-20, -20)]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC4JCC3();
+    rotateJ([xy(-40, 0), xy(-20, 20), null, xy(20, -20)]);
   }
 }
 
 function checkJRotationCounterClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC3JCC1();
+    rotateJ([xy(0, 40), xy(20, 20), null, xy(-20, -20)]);
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC1JCC2();
+    rotateJ([xy(40, 0), xy(20, -20), null, xy(-20, 20)]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC4JCC3();
+    rotateJ([xy(-40, 0), xy(-20, 20), null, xy(20, -20)]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC2JCC4();
+    rotateJ([xy(0, -40), xy(-20, -20), null, xy(20, 20)]);
   }
 }
 
