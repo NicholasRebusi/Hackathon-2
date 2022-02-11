@@ -411,6 +411,15 @@ function rotateJC4JCC3(){
   curBlock[3].yPos += -20
 }
 
+function rotateJ(values) {
+  curBlock[0].xPos += vaues[0].x;
+  curBlock[0].yPos += values[0].y;
+  curBlock[1].xPos += values[1].x;
+  curBlock[1].yPos += values[1].y;
+  curBlock[3].xPos += values[3].x;
+  curBlock[3].yPos += values[3].y;
+}
+
 function checkJRotationClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
     rotateJC1JCC2();
