@@ -398,34 +398,37 @@ function rotateJ(values) {
 
 function checkJRotationClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[0]);
+    return 0;
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[1]);
+    return 1;
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[2]);
+    return 2;
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[3]);
+    return 3;
   }
 }
 
+
 function checkJRotationCounterClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[2]);
+    return 2;
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[0]);
+    return 0;
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[3]);
+    return 3;
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ(J_ROTATIONS[1]);
+    return 1;
   }
 }
 
 function checkJRotationDirection(bool){
+  let rotation;
   if (bool) {
-    checkJRotationClockwise();
-  }else {
-    checkJRotationCounterClockwise();
+    rotation = checkJRotationClockwise();
+  } else {
+    rotation = checkJRotationCounterClockwise();
   }
+  rotateJ(J_ROTATIONS[rotation]);
 }
 
 /////////////////////////////////////////////////////////////
