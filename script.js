@@ -396,7 +396,7 @@ function rotateJ(values) {
   }
 }
 
-function checkJRotation(clockwise){
+function getJRotation(clockwise){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
     return clockwise ? 0 : 2;
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
@@ -408,9 +408,8 @@ function checkJRotation(clockwise){
   }
 }
 
-function checkJRotationDirection(bool){
-  let rotation = checkJRotation(bool);
-  rotateJ(J_ROTATIONS[rotation]);
+function checkJRotationDirection(clockwise){
+  rotateJ(J_ROTATIONS[getJRotation(clockwise)]);
 }
 
 /////////////////////////////////////////////////////////////
