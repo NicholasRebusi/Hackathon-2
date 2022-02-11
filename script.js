@@ -9,7 +9,7 @@ var curBlock = [];
 var score = 0;
 // var direction = ""
 
-var typesNames = ["J"] // ["O", "J", "L", "S", "Z", "T", "I"]
+var typesNames = ["O", "J", "L", "S", "Z", "T", "I"]
 let types = {
   O: [
     ['#E5F72C', '#E5F72C'],
