@@ -379,16 +379,16 @@ function rotateJC1JCC2(){
   curBlock[0].xPos += 40
   curBlock[0].yPos += 0
   curBlock[1].xPos += 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos -= 20
+  curBlock[1].yPos += -20
+  curBlock[3].xPos += -20
   curBlock[3].yPos += 20
 }
 
 function rotateJC2JCC4(){
   curBlock[0].xPos += 0
-  curBlock[0].yPos -= 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos -= 20
+  curBlock[0].yPos += -40
+  curBlock[1].xPos += -20
+  curBlock[1].yPos += -20
   curBlock[3].xPos += 20
   curBlock[3].yPos += 20
 }
@@ -398,17 +398,17 @@ function rotateJC3JCC1(){
   curBlock[0].yPos += 40
   curBlock[1].xPos += 20
   curBlock[1].yPos += 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos -= 20
+  curBlock[3].xPos += -20
+  curBlock[3].yPos += -20
 }
 
 function rotateJC4JCC3(){
-  curBlock[0].xPos -= 40
+  curBlock[0].xPos += -40
   curBlock[0].yPos += 0
-  curBlock[1].xPos -= 20
+  curBlock[1].xPos += -20
   curBlock[1].yPos += 20
   curBlock[3].xPos += 20
-  curBlock[3].yPos -= 20
+  curBlock[3].yPos += -20
 }
 
 function checkJRotationClockwise(){
