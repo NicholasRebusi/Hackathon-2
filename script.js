@@ -396,12 +396,12 @@ function rotateJC4JCC3(){
 }
 
 function rotateJ(values) {
-  curBlock[0].xPos += values[0].x;
-  curBlock[0].yPos += values[0].y;
-  curBlock[1].xPos += values[1].x;
-  curBlock[1].yPos += values[1].y;
-  curBlock[3].xPos += values[3].x;
-  curBlock[3].yPos += values[3].y;
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] !== null) {
+      curBlock[i].xPos += values[i].x;
+      curBlock[i].yPos += values[i].y;
+    }
+  }
 }
 
 function checkJRotationClockwise(){
