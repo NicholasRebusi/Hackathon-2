@@ -377,6 +377,7 @@ function keyReleased() {
 
 function rotateJC1JCC2(){
   curBlock[0].xPos += 40
+  curBlock[0].yPos += 0
   curBlock[1].xPos += 20
   curBlock[1].yPos -= 20
   curBlock[3].xPos -= 20
@@ -384,6 +385,7 @@ function rotateJC1JCC2(){
 }
 
 function rotateJC2JCC4(){
+  curBlock[0].xPos += 0
   curBlock[0].yPos -= 40
   curBlock[1].xPos -= 20
   curBlock[1].yPos -= 20
@@ -392,6 +394,7 @@ function rotateJC2JCC4(){
 }
 
 function rotateJC3JCC1(){
+  curBlock[0].xPos += 0
   curBlock[0].yPos += 40
   curBlock[1].xPos += 20
   curBlock[1].yPos += 20
@@ -401,6 +404,7 @@ function rotateJC3JCC1(){
 
 function rotateJC4JCC3(){
   curBlock[0].xPos -= 40
+  curBlock[0].yPos += 0
   curBlock[1].xPos -= 20
   curBlock[1].yPos += 20
   curBlock[3].xPos += 20
@@ -613,7 +617,7 @@ function checkZRotationClockwise(){
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
     rotateZC3ZCC1();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateZC4ZCC3(); 
+    rotateZC4ZCC3();
   }
 }
 
