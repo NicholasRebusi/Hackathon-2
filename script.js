@@ -396,38 +396,20 @@ function rotateJ(values) {
   }
 }
 
-function checkJRotationClockwise(){
+function checkJRotation(clockwise){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    return 0;
+    return clockwise ? 0 : 2;
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    return 1;
+    return clockwise ? 1 : 0; //
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    return 2;
+    return clockwise ? 2 : 3;
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    return 3;
-  }
-}
-
-
-function checkJRotationCounterClockwise(){
-  if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    return 2;
-  } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    return 0;
-  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    return 3;
-  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    return 1;
+    return clockwise ? 3 : 1;
   }
 }
 
 function checkJRotationDirection(bool){
-  let rotation;
-  if (bool) {
-    rotation = checkJRotationClockwise();
-  } else {
-    rotation = checkJRotationCounterClockwise();
-  }
+  let rotation = checkJRotation(bool);
   rotateJ(J_ROTATIONS[rotation]);
 }
 
