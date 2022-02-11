@@ -9,7 +9,7 @@ var curBlock = [];
 var score = 0;
 // var direction = ""
 
-var typesNames = ["O", "J", "L", "S", "Z", "T", "I"]
+var typesNames = ["J"] // ["O", "J", "L", "S", "Z", "T", "I"]
 let types = {
   O: [
     ['#E5F72C', '#E5F72C'],
@@ -379,6 +379,14 @@ function xy(x, y) {
 
 ///////////////////////////////////////////////
 
+const J_ROTATIONS = [
+  [xy(40, 0),  xy(20, -20),  null, xy(-20, 20)],
+  [xy(0, -40), xy(-20, -20), null, xy(20, 20)],
+  [xy(0, 40),  xy(20, 20),   null, xy(-20, -20)],
+  [xy(-40, 0), xy(-20, 20),  null, xy(20, -20)],
+];
+
+
 function rotateJ(values) {
   for (let i = 0; i < values.length; i++) {
     if (values[i] !== null) {
@@ -390,25 +398,25 @@ function rotateJ(values) {
 
 function checkJRotationClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ([xy(40, 0), xy(20, -20), null, xy(-20, 20)]);
+    rotateJ(J_ROTATIONS[0]);
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ([xy(0, -40), xy(-20, -20), null, xy(20, 20)]);
+    rotateJ(J_ROTATIONS[1]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ([xy(0, 40), xy(20, 20), null, xy(-20, -20)]);
+    rotateJ(J_ROTATIONS[2]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ([xy(-40, 0), xy(-20, 20), null, xy(20, -20)]);
+    rotateJ(J_ROTATIONS[3]);
   }
 }
 
 function checkJRotationCounterClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ([xy(0, 40), xy(20, 20), null, xy(-20, -20)]);
+    rotateJ(J_ROTATIONS[2]);
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ([xy(40, 0), xy(20, -20), null, xy(-20, 20)]);
+    rotateJ(J_ROTATIONS[0]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJ([xy(-40, 0), xy(-20, 20), null, xy(20, -20)]);
+    rotateJ(J_ROTATIONS[3]);
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJ([xy(0, -40), xy(-20, -20), null, xy(20, 20)]);
+    rotateJ(J_ROTATIONS[1]);
   }
 }
 
