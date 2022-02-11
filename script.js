@@ -373,7 +373,9 @@ function keyReleased() {
   }
 }
 
-function rotateJC1(){
+///////////////////////////////////////////////
+
+function rotateJC1JCC2(){
   curBlock[0].xPos += 40
   curBlock[1].xPos += 20
   curBlock[1].yPos -= 20
@@ -381,7 +383,7 @@ function rotateJC1(){
   curBlock[3].yPos += 20
 }
 
-function rotateJC2(){
+function rotateJC2JCC4(){
   curBlock[0].yPos -= 40
   curBlock[1].xPos -= 20
   curBlock[1].yPos -= 20
@@ -389,7 +391,7 @@ function rotateJC2(){
   curBlock[3].yPos += 20
 }
 
-function rotateJC3(){
+function rotateJC3JCC1(){
   curBlock[0].yPos += 40
   curBlock[1].xPos += 20
   curBlock[1].yPos += 20
@@ -397,67 +399,35 @@ function rotateJC3(){
   curBlock[3].yPos -= 20
 }
 
-function rotateJC4(){
+function rotateJC4JCC3(){
   curBlock[0].xPos -= 40
   curBlock[1].xPos -= 20
   curBlock[1].yPos += 20
   curBlock[3].xPos += 20
   curBlock[3].yPos -= 20
-}
-
-function rotateJCC1(){
-  curBlock[0].yPos += 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateJCC2(){
-  curBlock[0].xPos += 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos += 20
-}
-
-function rotateJCC3(){
-  curBlock[0].xPos -= 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateJCC4(){
-  curBlock[0].yPos -= 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos += 20
 }
 
 function checkJRotationClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC1();
+    rotateJC1JCC2();
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC2();
+    rotateJC2JCC4();
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC3();
+    rotateJC3JCC1();
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC4();
+    rotateJC4JCC3();
   }
 }
 
 function checkJRotationCounterClockwise(){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJCC1();
+    rotateJC3JCC1();
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJCC2();
+    rotateJC1JCC2();
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJCC3();
+    rotateJC4JCC3();
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJCC4();
+    rotateJC2JCC4();
   }
 }
 
@@ -471,7 +441,7 @@ function checkJRotationDirection(bool){
 
 /////////////////////////////////////////////////////////////
 
-function rotateLC1(){
+function rotateLC1LCC2(){
   curBlock[0].xPos += 40
   curBlock[1].xPos -= 20
   curBlock[1].yPos -= 20
@@ -479,7 +449,7 @@ function rotateLC1(){
   curBlock[3].yPos += 20
 }
 
-function rotateLC2(){
+function rotateLC2LCC4(){
   curBlock[0].yPos -= 40
   curBlock[1].xPos -= 20
   curBlock[1].yPos += 20
@@ -487,7 +457,7 @@ function rotateLC2(){
   curBlock[3].yPos -= 20
 }
 
-function rotateLC3(){
+function rotateLC3LCC1(){
   curBlock[0].yPos += 40
   curBlock[1].xPos += 20
   curBlock[1].yPos -= 20
@@ -495,67 +465,35 @@ function rotateLC3(){
   curBlock[3].yPos += 20
 }
 
-function rotateLC4(){
+function rotateLC4LCC3(){
   curBlock[0].xPos -= 40
   curBlock[1].xPos += 20
   curBlock[1].yPos += 20
   curBlock[3].xPos -= 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateLCC1(){
-  curBlock[0].yPos += 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos += 20
-}
-
-function rotateLCC2(){
-  curBlock[0].xPos += 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos += 20
-}
-
-function rotateLCC3(){
-  curBlock[0].xPos -= 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateLCC4(){
-  curBlock[0].yPos -= 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos += 20
   curBlock[3].yPos -= 20
 }
 
 function checkLRotationClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos) {
-    rotateLC1();
+    rotateLC1LCC2();
   } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    rotateLC2();
+    rotateLC2LCC4();
   } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    rotateLC3();
+    rotateLC3LCC1();
   } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    rotateLC4();
+    rotateLC4LCC3();
   }
 }
 
 function checkLRotationCounterClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos) {
-    rotateLCC1();
+    rotateLC3LCC1();
   } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    rotateLCC2();
+    rotateLC1LCC2();
   } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    rotateLCC3();
+    rotateLC4LCC3();
   } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    rotateLCC4()
+    rotateLC2LCC4();
   }
 }
 
@@ -569,7 +507,7 @@ function checkLRotationDirection(bool){
 
 ///////////////////////////////////////////////////////////////////////
 
-function rotateSC1(){
+function rotateSC1SCC2(){
   curBlock[1].xPos += 40
   curBlock[0].xPos += 20
   curBlock[0].yPos -= 20
@@ -577,7 +515,7 @@ function rotateSC1(){
   curBlock[2].yPos -= 20
 }
 
-function rotateSC2(){
+function rotateSC2SCC4(){
   curBlock[1].yPos -= 40
   curBlock[0].xPos -= 20
   curBlock[0].yPos -= 20
@@ -585,7 +523,7 @@ function rotateSC2(){
   curBlock[2].yPos += 20
 }
 
-function rotateSC3(){
+function rotateSC3SCC1(){
   curBlock[1].yPos += 40
   curBlock[0].xPos += 20
   curBlock[0].yPos += 20
@@ -593,67 +531,35 @@ function rotateSC3(){
   curBlock[2].yPos -= 20
 }
 
-function rotateSC4(){
+function rotateSC4SCC3(){
   curBlock[1].xPos -= 40
   curBlock[0].xPos -= 20
   curBlock[0].yPos += 20
   curBlock[2].xPos += 20
-  curBlock[2].yPos += 20
-}
-
-function rotateSCC1(){
-  curBlock[1].yPos += 40
-  curBlock[0].xPos += 20
-  curBlock[0].yPos += 20
-  curBlock[2].xPos += 20
-  curBlock[2].yPos -= 20
-}
-
-function rotateSCC2(){
-  curBlock[1].xPos += 40
-  curBlock[0].xPos += 20
-  curBlock[0].yPos -= 20
-  curBlock[2].xPos -= 20
-  curBlock[2].yPos -= 20
-}
-
-function rotateSCC3(){
-  curBlock[1].xPos -= 40
-  curBlock[0].xPos -= 20
-  curBlock[0].yPos += 20
-  curBlock[2].xPos += 20
-  curBlock[2].yPos += 20
-}
-
-function rotateSCC4(){
-  curBlock[1].yPos -= 40
-  curBlock[0].xPos -= 20
-  curBlock[0].yPos -= 20
-  curBlock[2].xPos -= 20
   curBlock[2].yPos += 20
 }
 
 function checkSRotationClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos) {
-    rotateSC1();
+    rotateSC1SCC2();
   } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    rotateSC2();
+    rotateSC2SCC4();
   } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    rotateSC3();
+    rotateSC3SCC1();
   } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    rotateSC4();
+    rotateSC4SCC3();
   }
 }
 
 function checkSRotationCounterClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos) {
-    rotateSCC1();
+    rotateSC3SCC1();
   } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    rotateSCC2();
+    rotateSC1SCC2();
   } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    rotateSCC3()
+    rotateSC4SCC3();
   } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    rotateSCC4()
+    rotateSC2SCC4();
   }
 }
 
@@ -667,7 +573,7 @@ function checkSRotationDirection(bool){
 
 /////////////////////////////////////////////////////////////
 
-function rotateZC1(){
+function rotateZC1ZCC2(){
   curBlock[0].xPos += 40
   curBlock[1].xPos += 20
   curBlock[1].yPos += 20
@@ -675,7 +581,7 @@ function rotateZC1(){
   curBlock[3].yPos += 20
 }
 
-function rotateZC2(){
+function rotateZC2ZCC4(){
   curBlock[0].yPos -= 40
   curBlock[1].xPos += 20
   curBlock[1].yPos -= 20
@@ -683,7 +589,7 @@ function rotateZC2(){
   curBlock[3].yPos += 20
 }
 
-function rotateZC3(){
+function rotateZC3ZCC1(){
   curBlock[0].yPos += 40
   curBlock[1].xPos -= 20
   curBlock[1].yPos += 20
@@ -691,67 +597,35 @@ function rotateZC3(){
   curBlock[3].yPos -= 20
 }
 
-function rotateZC4(){
+function rotateZC4ZCC3(){
   curBlock[0].xPos -= 40
   curBlock[1].xPos -= 20
   curBlock[1].yPos -= 20
   curBlock[3].xPos += 20
   curBlock[3].yPos -= 20
-}
-
-function rotateZCC1(){
-  curBlock[0].yPos += 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateZCC2(){
-  curBlock[0].xPos += 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos += 20
-}
-
-function rotateZCC3(){
-  curBlock[0].xPos -= 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateZCC4(){
-  curBlock[0].yPos -= 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos += 20
 }
 
 function checkZRotationClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateZC1();
+    rotateZC1ZCC2();
   } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateZC2();
+    rotateZC2ZCC4();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateZC3();
+    rotateZC3ZCC1();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateZC4(); 
+    rotateZC4ZCC3(); 
   }
 }
 
 function checkZRotationCounterClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateZCC1();
+    rotateZC3ZCC1();
   } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateZCC2();
+    rotateZC1ZCC2();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateZCC3();
+    rotateZC4ZCC3();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateZCC4();
+    rotateZC2ZCC4();
   }
 }
 
@@ -765,7 +639,7 @@ function checkZRotationDirection(bool){
 
 /////////////////////////////////////////////
 
-function rotateTC1(){
+function rotateTC1TCC2(){
   curBlock[0].xPos += 20
   curBlock[0].yPos += 20
   curBlock[1].xPos += 20
@@ -774,7 +648,7 @@ function rotateTC1(){
   curBlock[3].yPos += 20
 }
 
-function rotateTC2(){
+function rotateTC2TCC4(){
   curBlock[0].xPos += 20
   curBlock[0].yPos -= 20
   curBlock[1].xPos -= 20
@@ -783,7 +657,7 @@ function rotateTC2(){
   curBlock[3].yPos += 20
 }
 
-function rotateTC3(){
+function rotateTC3TCC1(){
   curBlock[0].xPos -= 20
   curBlock[0].yPos += 20
   curBlock[1].xPos += 20
@@ -792,72 +666,36 @@ function rotateTC3(){
   curBlock[3].yPos -= 20
 }
 
-function rotateTC4(){
+function rotateTC4TCC3(){
   curBlock[0].xPos -= 20
   curBlock[0].yPos -= 20
   curBlock[1].xPos -= 20
   curBlock[1].yPos += 20
   curBlock[3].xPos += 20
   curBlock[3].yPos -= 20
-}
-
-function rotateTCC1(){
-  curBlock[0].xPos -= 20
-  curBlock[0].yPos += 20
-  curBlock[1].xPos += 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateTCC2(){
-  curBlock[0].xPos += 20
-  curBlock[0].yPos += 20
-  curBlock[1].xPos += 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos += 20
-}
-
-function rotateTCC3(){
-  curBlock[0].xPos -= 20
-  curBlock[0].yPos -= 20
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateTCC4(){
-  curBlock[0].xPos += 20
-  curBlock[0].yPos -= 20
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos += 20
 }
 
 function checkTRotationClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateTC1();
+    rotateTC1TCC2();
   } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateTC2();
+    rotateTC2TCC4();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateTC3();
+    rotateTC3TCC1();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateTC4();
+    rotateTC4TCC3();
   }
 }
 
 function checkTRotationCounterClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateTCC1();
+    rotateTC3TCC1();
   } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateTCC2();
+    rotateTC1TCC2();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    rotateTCC3();
+    rotateTC4TCC3();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateTCC4();
+    rotateTC2TCC4();
   }
 }
 
@@ -871,7 +709,7 @@ function checkTRotationDirection(bool){
 
 ///////////////////////////////////////////////////////////
 
-function rotateIC1(){
+function rotateIC1ICC2(){
   curBlock[0].xPos += 20
   curBlock[0].yPos -= 20
   curBlock[2].xPos -= 20
@@ -880,7 +718,7 @@ function rotateIC1(){
   curBlock[3].yPos += 40
 }
 
-function rotateIC2(){
+function rotateIC2ICC4(){
   curBlock[0].xPos -= 20
   curBlock[0].yPos -= 20
   curBlock[2].xPos += 20
@@ -889,7 +727,7 @@ function rotateIC2(){
   curBlock[3].yPos += 40
 }
 
-function rotateIC3(){
+function rotateIC3ICC1(){
   curBlock[0].xPos += 20
   curBlock[0].yPos += 20
   curBlock[2].xPos -= 20
@@ -898,72 +736,36 @@ function rotateIC3(){
   curBlock[3].yPos -= 40
 }
 
-function rotateIC4(){
+function rotateIC4ICC3(){
   curBlock[0].xPos -= 20
   curBlock[0].yPos += 20
   curBlock[2].xPos += 20
   curBlock[2].yPos -= 20
   curBlock[3].xPos += 40
   curBlock[3].yPos -= 40
-}
-
-function rotateICC1(){
-  curBlock[0].xPos += 20
-  curBlock[0].yPos += 20
-  curBlock[2].xPos -= 20
-  curBlock[2].yPos -= 20
-  curBlock[3].xPos -= 40
-  curBlock[3].yPos -= 40
-}
-
-function rotateICC2(){
-  curBlock[0].xPos += 20
-  curBlock[0].yPos -= 20
-  curBlock[2].xPos -= 20
-  curBlock[2].yPos += 20
-  curBlock[3].xPos -= 40
-  curBlock[3].yPos += 40
-}
-
-function rotateICC3(){
-  curBlock[0].xPos -= 20
-  curBlock[0].yPos += 20
-  curBlock[2].xPos += 20
-  curBlock[2].yPos -= 20
-  curBlock[3].xPos += 40
-  curBlock[3].yPos -= 40
-}
-
-function rotateICC4(){
-  curBlock[0].xPos -= 20
-  curBlock[0].yPos -= 20
-  curBlock[2].xPos += 20
-  curBlock[2].yPos += 20
-  curBlock[3].xPos += 40
-  curBlock[3].yPos += 40
 }
 
 function checkIRotationClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos) {
-    rotateIC1();
+    rotateIC1ICC2();
   } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    rotateIC2();
+    rotateIC2ICC4();
   } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    rotateIC3();
+    rotateIC3ICC1();
   } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    rotateIC4();
+    rotateIC4ICC3();
   }
 }
 
 function checkIRotationCounterClockwise(){
   if (curBlock[0].xPos < curBlock[3].xPos) {
-    rotateICC1();
+    rotateIC3ICC1();
   } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    rotateICC2();
+    rotateIC1ICC2();
   } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    rotateICC3();
+    rotateIC4ICC3();
   } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    rotateICC4();
+    rotateIC2ICC4();
   }
 }
 
@@ -974,6 +776,8 @@ function checkIRotationDirection(bool){
     checkIRotationCounterClockwise();
   }
 }
+
+///////////////////////////////////////////////
 
 function rotateBlock(direction) {
   if (curBlock[0].type == "J") {
