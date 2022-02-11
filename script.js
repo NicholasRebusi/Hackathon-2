@@ -346,12 +346,12 @@ function keyPressed() {
     moveLeft()
   }
   if (keyCode === DOWN_ARROW) {
-    //cloakwise
-    rotateBlock(1)
+    //clockwise
+    rotateBlock(true)
   }
   if (keyCode === UP_ARROW) {
     //counterclockwise
-    rotateBlock(2)
+    rotateBlock(false)
   }
   if (keyCode === 16) {
     slam();
@@ -373,366 +373,620 @@ function keyReleased() {
   }
 }
 
+function rotateJC1(){
+  curBlock[0].xPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateJC2(){
+  curBlock[0].yPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function rotateJC3(){
+  curBlock[0].yPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateJC4(){
+  curBlock[0].xPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateJCC1(){
+  curBlock[0].yPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateJCC2(){
+  curBlock[0].xPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateJCC3(){
+  curBlock[0].xPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateJCC4(){
+  curBlock[0].yPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function checkJRotationClockwise(){
+  if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
+    rotateJC1();
+  } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
+    rotateJC2();
+  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
+    rotateJC3();
+  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
+    rotateJC4();
+  }
+}
+
+function checkJRotationCounterClockwise(){
+  if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
+    rotateJCC1();
+  } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
+    rotateJCC2();
+  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
+    rotateJCC3();
+  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
+    rotateJCC4();
+  }
+}
+
+function checkJRotationDirection(bool){
+  if (bool) {
+    checkJRotationClockwise();
+  }else {
+    checkJRotationCounterClockwise();
+  }
+}
+
+/////////////////////////////////////////////////////////////
+
+function rotateLC1(){
+  curBlock[0].xPos += 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function rotateLC2(){
+  curBlock[0].yPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateLC3(){
+  curBlock[0].yPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateLC4(){
+  curBlock[0].xPos -= 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateLCC1(){
+  curBlock[0].yPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateLCC2(){
+  curBlock[0].xPos += 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function rotateLCC3(){
+  curBlock[0].xPos -= 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateLCC4(){
+  curBlock[0].yPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function checkLRotationClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos) {
+    rotateLC1();
+  } else if (curBlock[0].yPos > curBlock[3].yPos) {
+    rotateLC2();
+  } else if (curBlock[0].yPos < curBlock[3].yPos) {
+    rotateLC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos) {
+    rotateLC4();
+  }
+}
+
+function checkLRotationCounterClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos) {
+    rotateLCC1();
+  } else if (curBlock[0].yPos > curBlock[3].yPos) {
+    rotateLCC2();
+  } else if (curBlock[0].yPos < curBlock[3].yPos) {
+    rotateLCC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos) {
+    rotateLCC4()
+  }
+}
+
+function checkLRotationDirection(bool){
+  if (bool) {
+    checkLRotationClockwise();
+  }else {
+    checkLRotationCounterClockwise();
+  }
+}
+
+///////////////////////////////////////////////////////////////////////
+
+function rotateSC1(){
+  curBlock[1].xPos += 40
+  curBlock[0].xPos += 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos -= 20
+}
+
+function rotateSC2(){
+  curBlock[1].yPos -= 40
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos += 20
+}
+
+function rotateSC3(){
+  curBlock[1].yPos += 40
+  curBlock[0].xPos += 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos -= 20
+}
+
+function rotateSC4(){
+  curBlock[1].xPos -= 40
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos += 20
+}
+
+function rotateSCC1(){
+  curBlock[1].yPos += 40
+  curBlock[0].xPos += 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos -= 20
+}
+
+function rotateSCC2(){
+  curBlock[1].xPos += 40
+  curBlock[0].xPos += 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos -= 20
+}
+
+function rotateSCC3(){
+  curBlock[1].xPos -= 40
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos += 20
+}
+
+function rotateSCC4(){
+  curBlock[1].yPos -= 40
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos += 20
+}
+
+function checkSRotationClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos) {
+    rotateSC1();
+  } else if (curBlock[0].yPos > curBlock[3].yPos) {
+    rotateSC2();
+  } else if (curBlock[0].yPos < curBlock[3].yPos) {
+    rotateSC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos) {
+    rotateSC4();
+  }
+}
+
+function checkSRotationCounterClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos) {
+    rotateSCC1();
+  } else if (curBlock[0].yPos > curBlock[3].yPos) {
+    rotateSCC2();
+  } else if (curBlock[0].yPos < curBlock[3].yPos) {
+    rotateSCC3()
+  } else if (curBlock[0].xPos > curBlock[3].xPos) {
+    rotateSCC4()
+  }
+}
+
+function checkSRotationDirection(bool){
+  if (bool) {
+    checkSRotationClockwise();
+  }else {
+    checkSRotationCounterClockwise();
+  }
+}
+
+/////////////////////////////////////////////////////////////
+
+function rotateZC1(){
+  curBlock[0].xPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateZC2(){
+  curBlock[0].yPos -= 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function rotateZC3(){
+  curBlock[0].yPos += 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateZC4(){
+  curBlock[0].xPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateZCC1(){
+  curBlock[0].yPos += 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateZCC2(){
+  curBlock[0].xPos += 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateZCC3(){
+  curBlock[0].xPos -= 40
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateZCC4(){
+  curBlock[0].yPos -= 40
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function checkZRotationClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateZC1();
+  } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateZC2();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateZC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateZC4(); 
+  }
+}
+
+function checkZRotationCounterClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateZCC1();
+  } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateZCC2();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateZCC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateZCC4();
+  }
+}
+
+function checkZRotationDirection(bool){
+  if (bool) {
+    checkZRotationClockwise();
+  }else {
+    checkZRotationCounterClockwise();
+  }
+}
+
+/////////////////////////////////////////////
+
+function rotateTC1(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos += 20
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateTC2(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos -= 20
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function rotateTC3(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos += 20
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateTC4(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos -= 20
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateTCC1(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos += 20
+  curBlock[1].xPos += 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateTCC2(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos += 20
+  curBlock[1].xPos += 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos -= 20
+  curBlock[3].yPos += 20
+}
+
+function rotateTCC3(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos -= 20
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos += 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos -= 20
+}
+
+function rotateTCC4(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos -= 20
+  curBlock[1].xPos -= 20
+  curBlock[1].yPos -= 20
+  curBlock[3].xPos += 20
+  curBlock[3].yPos += 20
+}
+
+function checkTRotationClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateTC1();
+  } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateTC2();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateTC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateTC4();
+  }
+}
+
+function checkTRotationCounterClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateTCC1();
+  } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateTCC2();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
+    rotateTCC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
+    rotateTCC4();
+  }
+}
+
+function checkTRotationDirection(bool){
+  if (bool) {
+    checkTRotationClockwise();
+  }else {
+    checkTRotationCounterClockwise();
+  }
+}
+
+///////////////////////////////////////////////////////////
+
+function rotateIC1(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos += 20
+  curBlock[3].xPos -= 40
+  curBlock[3].yPos += 40
+}
+
+function rotateIC2(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos += 20
+  curBlock[3].xPos += 40
+  curBlock[3].yPos += 40
+}
+
+function rotateIC3(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos -= 20
+  curBlock[3].xPos -= 40
+  curBlock[3].yPos -= 40
+}
+
+function rotateIC4(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos -= 20
+  curBlock[3].xPos += 40
+  curBlock[3].yPos -= 40
+}
+
+function rotateICC1(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos -= 20
+  curBlock[3].xPos -= 40
+  curBlock[3].yPos -= 40
+}
+
+function rotateICC2(){
+  curBlock[0].xPos += 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos -= 20
+  curBlock[2].yPos += 20
+  curBlock[3].xPos -= 40
+  curBlock[3].yPos += 40
+}
+
+function rotateICC3(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos += 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos -= 20
+  curBlock[3].xPos += 40
+  curBlock[3].yPos -= 40
+}
+
+function rotateICC4(){
+  curBlock[0].xPos -= 20
+  curBlock[0].yPos -= 20
+  curBlock[2].xPos += 20
+  curBlock[2].yPos += 20
+  curBlock[3].xPos += 40
+  curBlock[3].yPos += 40
+}
+
+function checkIRotationClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos) {
+    rotateIC1();
+  } else if (curBlock[0].yPos > curBlock[3].yPos) {
+    rotateIC2();
+  } else if (curBlock[0].yPos < curBlock[3].yPos) {
+    rotateIC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos) {
+    rotateIC4();
+  }
+}
+
+function checkIRotationCounterClockwise(){
+  if (curBlock[0].xPos < curBlock[3].xPos) {
+    rotateICC1();
+  } else if (curBlock[0].yPos > curBlock[3].yPos) {
+    rotateICC2();
+  } else if (curBlock[0].yPos < curBlock[3].yPos) {
+    rotateICC3();
+  } else if (curBlock[0].xPos > curBlock[3].xPos) {
+    rotateICC4();
+  }
+}
+
+function checkIRotationDirection(bool){
+  if (bool) {
+    checkIRotationClockwise();
+  }else {
+    checkIRotationCounterClockwise();
+  }
+}
+
 function rotateBlock(direction) {
   if (curBlock[0].type == "J") {
-    if (direction == 1) {
-      if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-        curBlock[0].xPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-        curBlock[0].yPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-        curBlock[0].yPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-        curBlock[0].xPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      }
-
-    }
-    if (direction == 2) {
-      if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-        curBlock[0].yPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-        curBlock[0].xPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-        curBlock[0].xPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-        curBlock[0].yPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      }
-    }
-  }
-
-  if (curBlock[0].type == "L") {
-    if (direction == 1) {
-      if (curBlock[0].xPos < curBlock[3].xPos) {
-        curBlock[0].xPos += 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].yPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].yPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos) {
-        curBlock[0].xPos -= 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      }
-    }
-    if (direction == 2) {
-      if (curBlock[0].xPos < curBlock[3].xPos) {
-        curBlock[0].yPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos += 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos -= 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos) {
-        curBlock[0].yPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      }
-    }
-  }
-
-  if (curBlock[0].type == "S") {
-    if (direction == 1) {
-      if (curBlock[0].xPos < curBlock[3].xPos) {
-        curBlock[1].xPos += 40
-        curBlock[0].xPos += 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos -= 20
-      } else if (curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[1].yPos -= 40
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos += 20
-      } else if (curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[1].yPos += 40
-        curBlock[0].xPos += 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos -= 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos) {
-        curBlock[1].xPos -= 40
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos += 20
-      }
-    }
-    if (direction == 2) {
-      if (curBlock[0].xPos < curBlock[3].xPos) {
-        curBlock[1].yPos += 40
-        curBlock[0].xPos += 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos -= 20
-      } else if (curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[1].xPos += 40
-        curBlock[0].xPos += 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos -= 20
-      } else if (curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[1].xPos -= 40
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos += 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos) {
-        curBlock[1].yPos -= 40
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos += 20
-      }
-    }
-  }
-
-  if (curBlock[0].type == "Z") {
-    if (direction == 1) {
-      if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].yPos -= 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].yPos += 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      }
-
-    }
-    if (direction == 2) {
-      if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].yPos += 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos += 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos -= 40
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].yPos -= 40
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      }
-    }
-  }
-
-  if (curBlock[0].type == "T") {
-    if (direction == 1) {
-      if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos += 20
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos -= 20
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos += 20
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos -= 20
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      }
-
-    }
-    if (direction == 2) {
-      if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos += 20
-        curBlock[1].xPos += 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos += 20
-        curBlock[1].xPos += 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos -= 20
-        curBlock[3].yPos += 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos -= 20
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos += 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos -= 20
-      } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos -= 20
-        curBlock[1].xPos -= 20
-        curBlock[1].yPos -= 20
-        curBlock[3].xPos += 20
-        curBlock[3].yPos += 20
-      }
-    }
-  }
-
-  if (curBlock[0].type == "I") {
-    if (direction == 1) {
-      if (curBlock[0].xPos < curBlock[3].xPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos += 20
-        curBlock[3].xPos -= 40
-        curBlock[3].yPos += 40
-      } else if (curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos += 20
-        curBlock[3].xPos += 40
-        curBlock[3].yPos += 40
-      } else if (curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos -= 20
-        curBlock[3].xPos -= 40
-        curBlock[3].yPos -= 40
-      } else if (curBlock[0].xPos > curBlock[3].xPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos -= 20
-        curBlock[3].xPos += 40
-        curBlock[3].yPos -= 40
-      }
-
-    }
-    if (direction == 2) {
-      if (curBlock[0].xPos < curBlock[3].xPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos -= 20
-        curBlock[3].xPos -= 40
-        curBlock[3].yPos -= 40
-      } else if (curBlock[0].yPos > curBlock[3].yPos) {
-        curBlock[0].xPos += 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos -= 20
-        curBlock[2].yPos += 20
-        curBlock[3].xPos -= 40
-        curBlock[3].yPos += 40
-      } else if (curBlock[0].yPos < curBlock[3].yPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos += 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos -= 20
-        curBlock[3].xPos += 40
-        curBlock[3].yPos -= 40
-      } else if (curBlock[0].xPos > curBlock[3].xPos) {
-        curBlock[0].xPos -= 20
-        curBlock[0].yPos -= 20
-        curBlock[2].xPos += 20
-        curBlock[2].yPos += 20
-        curBlock[3].xPos += 40
-        curBlock[3].yPos += 40
-      }
-    }
+    checkJRotationDirection(direction);
+  }else if (curBlock[0].type == "L") {
+    checkLRotationDirection(direction);
+  }else if (curBlock[0].type == "S") {
+    checkSRotationDirection(direction);
+  }else if (curBlock[0].type == "Z") {
+    checkZRotationDirection(direction);
+  }else if (curBlock[0].type == "T") {
+    checkTRotationDirection(direction);
+  }else if (curBlock[0].type == "I") {
+    checkIRotationDirection(direction);
   }
 }
