@@ -9,7 +9,7 @@ var curBlock = [];
 var score = 0;
 // var direction = ""
 
-var typesNames = ["O", "J", "L", "S", "Z", "T", "I"]
+var typesNames = ["J"] // ["O", "J", "L", "S", "Z", "T", "I"]
 let types = {
   O: [
     ['#E5F72C', '#E5F72C'],
@@ -373,46 +373,30 @@ function keyReleased() {
   }
 }
 
+function xy(x, y) {
+  return { x: x, y: y };
+}
+
 ///////////////////////////////////////////////
 
 function rotateJC1JCC2(){
-  curBlock[0].xPos += 40
-  curBlock[0].yPos += 0
-  curBlock[1].xPos += 20
-  curBlock[1].yPos += -20
-  curBlock[3].xPos += -20
-  curBlock[3].yPos += 20
+  rotateJ([xy(40, 0), xy(20, -20), null, xy(-20, 20)]);
 }
 
 function rotateJC2JCC4(){
-  curBlock[0].xPos += 0
-  curBlock[0].yPos += -40
-  curBlock[1].xPos += -20
-  curBlock[1].yPos += -20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos += 20
+  rotateJ([xy(0, -40), xy(-20, -20), null, xy(20, 20)]);
 }
 
 function rotateJC3JCC1(){
-  curBlock[0].xPos += 0
-  curBlock[0].yPos += 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos += -20
-  curBlock[3].yPos += -20
+  rotateJ([xy(0, 40), xy(20, 20), null, xy(-20, -20)]);
 }
 
 function rotateJC4JCC3(){
-  curBlock[0].xPos += -40
-  curBlock[0].yPos += 0
-  curBlock[1].xPos += -20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos += -20
+  rotateJ([xy(-40, 0), xy(-20, 20), null, xy(20, -20)]);
 }
 
 function rotateJ(values) {
-  curBlock[0].xPos += vaues[0].x;
+  curBlock[0].xPos += values[0].x;
   curBlock[0].yPos += values[0].y;
   curBlock[1].xPos += values[1].x;
   curBlock[1].yPos += values[1].y;
