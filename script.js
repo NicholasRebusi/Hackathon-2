@@ -9,7 +9,7 @@ var curBlock = [];
 var score = 0;
 // var direction = ""
 
-var typesNames = ["O", "J", "L", "S", "Z", "T", "I"]
+var typesNames = ["O", "J", "L", "S", "Z", "T", "I"];
 let types = {
   O: [
     ['#E5F72C', '#E5F72C'],
@@ -373,70 +373,43 @@ function keyReleased() {
   }
 }
 
+function xy(x, y) {
+  return { x: x, y: y };
+}
+
 ///////////////////////////////////////////////
 
-function rotateJC1JCC2(){
-  curBlock[0].xPos += 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos += 20
+const J_ROTATIONS = [
+  [xy(40, 0),  xy(20, -20),  null, xy(-20, 20)],
+  [xy(0, -40), xy(-20, -20), null, xy(20, 20)],
+  [xy(0, 40),  xy(20, 20),   null, xy(-20, -20)],
+  [xy(-40, 0), xy(-20, 20),  null, xy(20, -20)],
+];
+
+
+function rotateJ(values) {
+  for (let i = 0; i < values.length; i++) {
+    if (values[i] !== null) {
+      curBlock[i].xPos += values[i].x;
+      curBlock[i].yPos += values[i].y;
+    }
+  }
 }
 
-function rotateJC2JCC4(){
-  curBlock[0].yPos -= 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos -= 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos += 20
-}
-
-function rotateJC3JCC1(){
-  curBlock[0].yPos += 40
-  curBlock[1].xPos += 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos -= 20
-  curBlock[3].yPos -= 20
-}
-
-function rotateJC4JCC3(){
-  curBlock[0].xPos -= 40
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos -= 20
-}
-
-function checkJRotationClockwise(){
+function getJRotation(clockwise){
   if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC1JCC2();
+    return clockwise ? 0 : 2;
   } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC2JCC4();
+    return clockwise ? 1 : 0; //
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC3JCC1();
+    return clockwise ? 2 : 3;
   } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC4JCC3();
+    return clockwise ? 3 : 1;
   }
 }
 
-function checkJRotationCounterClockwise(){
-  if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC3JCC1();
-  } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC1JCC2();
-  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    rotateJC4JCC3();
-  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    rotateJC2JCC4();
-  }
-}
-
-function checkJRotationDirection(bool){
-  if (bool) {
-    checkJRotationClockwise();
-  }else {
-    checkJRotationCounterClockwise();
-  }
+function checkJRotationDirection(clockwise){
+  rotateJ(J_ROTATIONS[getJRotation(clockwise)]);
 }
 
 /////////////////////////////////////////////////////////////
@@ -613,7 +586,7 @@ function checkZRotationClockwise(){
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
     rotateZC3ZCC1();
   } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    rotateZC4ZCC3(); 
+    rotateZC4ZCC3();
   }
 }
 
