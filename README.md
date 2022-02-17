@@ -8,5 +8,3 @@ UP_ARROW == rotateCounterClockwise()
 
 Issues:
 After a while the page begins to lag and grinds to a halt
-=======
-
