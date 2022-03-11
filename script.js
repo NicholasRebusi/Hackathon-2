@@ -347,11 +347,11 @@ function keyPressed() {
   }
   if (keyCode === DOWN_ARROW) {
     //clockwise
-    rotateBlock(true)
+    rotation(true)
   }
   if (keyCode === UP_ARROW) {
     //counterclockwise
-    rotateBlock(false)
+    rotation(false);
   }
   if (keyCode === 16) {
     slam();
@@ -377,189 +377,36 @@ function xy(x, y) {
   return { x: x, y: y };
 }
 
-///////////////////////////////////////////////
 
-const J_ROTATIONS = [
-  [xy(40, 0),  xy(20, -20),  null, xy(-20, 20)],
-  [xy(0, -40), xy(-20, -20), null, xy(20, 20)],
-  [xy(0, 40),  xy(20, 20),   null, xy(-20, -20)],
-  [xy(-40, 0), xy(-20, 20),  null, xy(20, -20)],
+var clockwiseMatrix = [
+[0, -1],
+[1, 0]
 ];
 
-
-function rotate90(values) {
-  for (let i = 0; i < values.length; i++) {
-    if (values[i] !== null) {
-      curBlock[i].xPos += values[i].x;
-      curBlock[i].yPos += values[i].y;
-    }
-  }
-}
-
-function getJRotation(clockwise){
-  if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    return clockwise ? 0 : 2;
-  } else if (curBlock[0].xPos <= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    return clockwise ? 1 : 0; //
-  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos <= curBlock[3].yPos) {
-    return clockwise ? 2 : 3;
-  } else if (curBlock[0].xPos >= curBlock[3].xPos && curBlock[0].yPos >= curBlock[3].yPos) {
-    return clockwise ? 3 : 1;
-  }
-}
-
-function checkJRotationDirection(clockwise){
-  rotate90(J_ROTATIONS[getJRotation(clockwise)]);
-}
-
-/////////////////////////////////////////////////////////////
-
-const L_ROTATIONS = [
-  [xy(40, 0),  xy(-20, -20),  null, xy(20, 20)],
-  [xy(0, -40), xy(-20, 20), null, xy(20, -20)],
-  [xy(0, 40),  xy(20, -20),   null, xy(-20, 20)],
-  [xy(-40, 0), xy(20, 20),  null, xy(-20, -20)],
+var counterClockwiseMatrix = [
+[0, 1],
+[-1, 0]
 ];
 
-function getLRotation(clockwise){
-  if (curBlock[0].xPos < curBlock[3].xPos) {
-    return clockwise ? 0 : 2;
-  } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    return clockwise ? 1 : 0; //
-  } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    return clockwise ? 2 : 3;
-  } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    return clockwise ? 3 : 1;
+function rotation(clockwise){
+  let piece0RelativePositionTo2 = [curBlock[0].xPos - curBlock[2].xPos, curBlock[0].yPos - curBlock[2].yPos];
+  let piece1RelativePositionTo2 = [curBlock[1].xPos - curBlock[2].xPos, curBlock[1].yPos - curBlock[2].yPos];
+  let piece3RelativePositionTo2 = [curBlock[3].xPos - curBlock[2].xPos, curBlock[3].yPos - curBlock[2].yPos];
+  for(let i = 0; i < 2; i++){
+    if(clockwise){
+      piece0RelativePositionTo2[i] = piece0RelativePositionTo2[i] * clockwiseMatrix[0][i] + piece0RelativePositionTo2[i] * clockwiseMatrix[1][i];
+      piece1RelativePositionTo2[i] = piece1RelativePositionTo2[i] * clockwiseMatrix[0][i] + piece1RelativePositionTo2[i] * clockwiseMatrix[1][i]
+      piece3RelativePositionTo2[i] = piece3RelativePositionTo2[i] * clockwiseMatrix[0][i] + piece3RelativePositionTo2[i] * clockwiseMatrix[1][i]
+    }else{
+      piece0RelativePositionTo2[i] = piece0RelativePositionTo2[i] * counterClockwiseMatrix[0][i] + piece0RelativePositionTo2[i] * counterClockwiseMatrix[1][i];
+      piece1RelativePositionTo2[i] = piece1RelativePositionTo2[i] * counterClockwiseMatrix[0][i] + piece1RelativePositionTo2[i] * counterClockwiseMatrix[1][i];
+      piece3RelativePositionTo2[i] = piece3RelativePositionTo2[i] * counterClockwiseMatrix[0][i] + piece3RelativePositionTo2[i] * counterClockwiseMatrix[1][i];
+    }   
   }
-}
-
-function checkLRotationDirection(clockwise){
-  rotate90(L_ROTATIONS[getLRotation(clockwise)]);
-}
-
-///////////////////////////////////////////////////////////////////////
-
-const S_ROTATIONS = [
-  [xy(20, -20),  xy(40, 0), xy(-20, -20), null],
-  [xy(-20, -20), xy(0, -40), xy(-20, 20), null],
-  [xy(20, 20),  xy(0, 40), xy(20, -20), null],
-  [xy(-20, 20), xy(-40, 0), xy(20, 20), null],
-];
-
-function getSRotation(clockwise){
-  if (curBlock[0].xPos < curBlock[3].xPos) {
-    return clockwise ? 0 : 2;
-  } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    return clockwise ? 1 : 0; //
-  } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    return clockwise ? 2 : 3;
-  } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    return clockwise ? 3 : 1;
-  }
-}
-
-function checkSRotationDirection(clockwise){
-  rotate90(S_ROTATIONS[getSRotation(clockwise)]);
-}
-
-/////////////////////////////////////////////////////////////
-
-const Z_ROTATIONS = [
-  [xy(40, 0),  xy(20, 20),  null, xy(-20, 20)],
-  [xy(0, -40), xy(20, -20), null, xy(20, 20)],
-  [xy(0, 40),  xy(-20, 20),   null, xy(-20, -20)],
-  [xy(-40, 0), xy(-20, -20),  null, xy(20, -20)],
-];
-
-function getZRotation(clockwise){
-  if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    return clockwise ? 0 : 2;
-  } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    return clockwise ? 1 : 0; //
-  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    return clockwise ? 2 : 3;
-  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    return clockwise ? 3 : 1;
-  }
-}
-
-function checkZRotationDirection(clockwise){
-  rotate90(Z_ROTATIONS[getZRotation(clockwise)]);
-}
-
-/////////////////////////////////////////////
-
-const T_ROTATIONS = [
-  [xy(20, 20),  xy(20, -20),  null, xy(-20, 20)],
-  [xy(20, -20), xy(-20, -20), null, xy(20, 20)],
-  [xy(-20, 20),  xy(20, 20),   null, xy(-20, -20)],
-  [xy(-20, -20), xy(-20, 20),  null, xy(20, -20)],
-];
-
-function rotateTC4TCC3(){
-  curBlock[0].xPos -= 20
-  curBlock[0].yPos -= 20
-  curBlock[1].xPos -= 20
-  curBlock[1].yPos += 20
-  curBlock[3].xPos += 20
-  curBlock[3].yPos -= 20
-}
-
-function getTRotation(clockwise){
-  if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    return clockwise ? 0 : 2;
-  } else if (curBlock[0].xPos < curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    return clockwise ? 1 : 0; //
-  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos < curBlock[3].yPos) {
-    return clockwise ? 2 : 3;
-  } else if (curBlock[0].xPos > curBlock[3].xPos && curBlock[0].yPos > curBlock[3].yPos) {
-    return clockwise ? 3 : 1;
-  }
-}
-
-function checkTRotationDirection(clockwise){
-  rotate90(T_ROTATIONS[getTRotation(clockwise)]);
-}
-
-///////////////////////////////////////////////////////////
-
-const I_ROTATIONS = [
-  [xy(20, -20), null,  xy(-20, 20), xy(-40, 40)],
-  [xy(-20, -20), null, xy(20, 20), xy(40, 40)],
-  [xy(20, 20), null,  xy(-20, -20), xy(-40, -40)],
-  [xy(-20, 20), null, xy(20, -20), xy(40, -40)],
-];
-
-function getIRotation(clockwise){
-  if (curBlock[0].xPos < curBlock[3].xPos) {
-    return clockwise ? 0 : 2;
-  } else if (curBlock[0].yPos > curBlock[3].yPos) {
-    return clockwise ? 1 : 0; //
-  } else if (curBlock[0].yPos < curBlock[3].yPos) {
-    return clockwise ? 2 : 3;
-  } else if (curBlock[0].xPos > curBlock[3].xPos) {
-    return clockwise ? 3 : 1;
-  }
-}
-
-function checkIRotationDirection(clockwise){
-  rotate90(I_ROTATIONS[getIRotation(clockwise)]);
-}
-
-///////////////////////////////////////////////
-
-function rotateBlock(direction) {
-  if (curBlock[0].type == "J") {
-    checkJRotationDirection(direction);
-  }else if (curBlock[0].type == "L") {
-    checkLRotationDirection(direction);
-  }else if (curBlock[0].type == "S") {
-    checkSRotationDirection(direction);
-  }else if (curBlock[0].type == "Z") {
-    checkZRotationDirection(direction);
-  }else if (curBlock[0].type == "T") {
-    checkTRotationDirection(direction);
-  }else if (curBlock[0].type == "I") {
-    checkIRotationDirection(direction);
-  }
+  curBlock[0].xPos = curBlock[2].xPos + piece0RelativePositionTo2[1];
+  curBlock[0].yPos = curBlock[2].yPos + piece0RelativePositionTo2[0];
+  curBlock[1].xPos = curBlock[2].xPos + piece1RelativePositionTo2[1];
+  curBlock[1].yPos = curBlock[2].yPos + piece1RelativePositionTo2[0];
+  curBlock[3].xPos = curBlock[2].xPos + piece3RelativePositionTo2[1];
+  curBlock[3].yPos = curBlock[2].yPos + piece3RelativePositionTo2[0];
 }
